@@ -40,22 +40,3 @@ test("homepage screenshots", async ({ page }, testInfo) => {
   await page.locator(".product-demo__takeover").waitFor({ state: "visible" });
   await captureScreenshot(page, testInfo, "04-marketing-demo-computer");
 });
-
-// Keep the shared header/footer visible in the CI gallery on other page layouts.
-test("shared navigation screenshots", async ({ page }, testInfo) => {
-  for (const [path, name] of [
-    ["/blog/", "05-marketing-blog"],
-    ["/blog/best-open-source-ai-agents-2026/", "06-marketing-blog-post"],
-    ["/alternatives/", "07-marketing-alternatives"],
-    ["/self-hosted-ai-agent/", "08-marketing-self-hosted"],
-    ["/de/", "09-marketing-homepage-de"],
-  ]) {
-    await page.goto(path);
-    await captureScreenshot(page, testInfo, name);
-  }
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await openHomepage(page);
-  await page.locator(".site-menu__toggle").click();
-  await captureScreenshot(page, testInfo, "10-marketing-mobile-menu");
-});
